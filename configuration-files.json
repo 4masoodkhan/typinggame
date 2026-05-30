@@ -1,0 +1,345 @@
+// ============================================================================
+// FILE 1: tsconfig.json
+// TypeScript configuration for the project
+// ============================================================================
+
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": "./src",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "build"]
+}
+
+// ============================================================================
+// FILE 2: tailwind.config.js
+// Tailwind CSS configuration
+// ============================================================================
+
+module.exports = {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: '#3B82F6',
+        secondary: '#8B5CF6',
+        accent: '#EC4899',
+      },
+      fontFamily: {
+        sans: [
+          '"Segoe UI"',
+          'Roboto',
+          '"Helvetica Neue"',
+          'Arial',
+          'sans-serif',
+        ],
+        mono: [
+          '"JetBrains Mono"',
+          '"Source Code Pro"',
+          'Menlo',
+          'monospace',
+        ],
+      },
+      spacing: {
+        '128': '32rem',
+        '144': '36rem',
+      },
+      animation: {
+        'shake': 'shake 0.3s cubic-bezier(0.36, 0, 0.66, -0.56)',
+        'bounce-slow': 'bounce 2s infinite',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        shake: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '25%': { transform: 'translateX(-10px)' },
+          '75%': { transform: 'translateX(10px)' },
+        },
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            color: '#1f2937',
+            '[class~="lead"]': {
+              color: '#6b7280',
+            },
+          },
+        },
+      },
+    },
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+  ],
+  darkMode: 'class',
+}
+
+// ============================================================================
+// FILE 3: postcss.config.js
+// PostCSS configuration
+// ============================================================================
+
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+
+// ============================================================================
+// FILE 4: .env.example
+// Environment variables template
+// Copy this file to .env.local and fill in your values
+// ============================================================================
+
+# Supabase Configuration
+REACT_APP_SUPABASE_URL=your_supabase_project_url_here
+REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+
+# Application Configuration
+REACT_APP_ENVIRONMENT=development
+REACT_APP_VERSION=1.0.0
+
+# Optional: External Services (if adding in future)
+# REACT_APP_GOOGLE_CLIENT_ID=your_google_client_id
+# REACT_APP_APPLE_CLIENT_ID=your_apple_client_id
+
+// ============================================================================
+// FILE 5: .gitignore
+// Git ignore configuration
+// ============================================================================
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Production
+build/
+dist/
+
+# Misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Testing
+coverage/
+.nyc_output/
+.coverage
+
+// ============================================================================
+// FILE 6: public/index.html
+// Main HTML file
+// ============================================================================
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#3B82F6" />
+    <meta
+      name="description"
+      content="TypeMaster - Master English through typing. Free typing practice with 120 high-quality stories across 6 CEFR levels."
+    />
+    <meta name="og:title" content="TypeMaster - English Typing Practice" />
+    <meta name="og:description" content="Learn English through typing with 120 stories, Web Speech API audio, and real-time analytics." />
+    <meta name="og:image" content="%PUBLIC_URL%/og-image.jpg" />
+    
+    <title>TypeMaster - Learn English Through Typing</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
+
+// ============================================================================
+// FILE 7: src/index.css
+// Main CSS file
+// ============================================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  @apply transition-colors duration-300;
+  overflow-x: hidden;
+}
+
+/* Smooth transitions for theme switching */
+* {
+  @apply transition-colors duration-300;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500 dark:bg-gray-500;
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  @apply outline-none ring-2 ring-offset-2 ring-blue-500 dark:ring-offset-gray-900;
+}
+
+/* Animations */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-shake {
+  animation: shake 0.3s cubic-bezier(0.36, 0, 0.66, -0.56);
+  background-color: rgba(239, 68, 68, 0.2);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-in-out;
+}
+
+/* Utility classes */
+.gradient-text {
+  @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
+}
+
+.glass-effect {
+  @apply backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-white/20 dark:border-gray-700/20;
+}
+
+.card {
+  @apply rounded-xl shadow-lg transition-transform duration-300 hover:scale-105;
+}
+
+.card.dark {
+  @apply bg-gray-800 border border-gray-700;
+}
+
+.card.light {
+  @apply bg-white border border-gray-200;
+}
+
+/* Responsive utility */
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 { @apply text-2xl; }
+  h2 { @apply text-xl; }
+  h3 { @apply text-lg; }
+}
+
+/* Print styles */
+@media print {
+  body {
+    @apply bg-white text-black;
+  }
+
+  button, nav {
+    @apply hidden;
+  }
+}
